@@ -6,8 +6,8 @@
 
 # Define class
 class dbConnectClass {
-    [string]$ConnectionString
-    [System.Data.Odbc.OdbcConnection] $connection
+    [string]$ConnectionString = $null
+    [System.Data.Odbc.OdbcConnection] $connection = $null
     [System.Data.Odbc.OdbcCommand] $command
     [System.Data.Odbc.OdbcDataReader] $reader
     [System.Data.Odbc.OdbcDataAdapter] $adapter
@@ -19,8 +19,8 @@ class dbConnectClass {
     dbConnectClass([string]$connectionString) {
         $this.ConnectionString = $connectionString
 
-        $connectString = "DSN=KVM; UID=iiujapan; PWD=iiujapan;"
-        $this.connection = New-Object System.Data.Odbc.OdbcConnection($connectString)
+        # $connectString = "DSN=KVM; UID=iiujapan; PWD=iiujapan;"
+        $this.connection = New-Object System.Data.Odbc.OdbcConnection($connectionString)
         $this.connection.Open()
 
     }
@@ -33,13 +33,21 @@ class dbConnectClass {
 
     [void]ReadData() {
         # Implement read logic here
+        $this.reader = $this.command.ExecuteReader()
+        while ($this.reader.Read()) {
+            $row = @{}
+            for ($i = 0; $i -lt $this.reader.FieldCount; $i++) {
+                $row[$this.reader.GetName($i)] = $this.reader.GetValue($i)
+            }
+            Write-Output $row
+        }
     }
 
     [void]WriteData() {
         # Implement write logic here
     }
 
-    [void]Terminate() {
+    [System.Boolean]Terminate() {
         # Implement termination logic here 
         if ($null -ne $this.reader) {
             $this.reader.Close()
@@ -48,10 +56,31 @@ class dbConnectClass {
 
         $this.connection.Close()
         $this.connection.Dispose()
+
+        return $true
     }
 }
 
 Set-Location $PSScriptRoot
+try {
+    $com = [dbConnectClass]::new("DSN=KVM; UID=iiujapan; PWD=iiujapan;")
+    $com.Connect()
+    $com.ReadData()
+}
+catch {
+    Write-Output "Error occurred: $_"
+}
+
+$ret = $com.Terminate()
+if ($ret) {
+    Write-Output "Connection terminated successfully."
+} else {
+    Write-Output "Failed to terminate connection."
+}
+
+
+
+
 
 #
 # read
