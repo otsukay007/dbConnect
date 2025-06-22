@@ -41,7 +41,7 @@ class dbConnectClass {
 
     [void]Terminate() {
         # Implement termination logic here 
-        if ($this.reader -ne $null) {
+        if ($null -ne $this.reader) {
             $this.reader.Close()
         }
         $this.command.Dispose()
