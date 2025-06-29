@@ -13,8 +13,8 @@ try {
     $com = [dbConnect]::new("DSN=KVM; UID=iiujapan; PWD=iiujapan;")
     $com.Connect()
 
-    $com.UseDatabase()
-
+    #$com.UseDatabase()
+    $com.CreateTable("object_0000")
 
     $com.ReadData()
 }

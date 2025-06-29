@@ -33,12 +33,22 @@ class dbConnect {
         # Implement connection logic here
         $this.command = $this.connection.CreateCommand( )
         $this.command.CommandText = "select * from tmdb_info_Avatar2"
+        $this.command.ExecuteNonQuery()
+    }
+
+    [void]CreateTable([string]$tableName) {
+        # Implement table creation logic here
+        $this.TableName = $tableName
+        $this.command = $this.connection.CreateCommand( )
+        $this.command.CommandText = "CREATE TABLE $tableName (ID INT PRIMARY KEY, Name NVARCHAR(100))"
+        $this.command.ExecuteNonQuery()
     }
 
     # Select use database
     [void]UseDatabase() {
         $this.command = $this.connection.CreateCommand( )
         $this.command.CommandText = "use kokoro"
+        $this.command.ExecuteNonQuery()
     }    
 
 
