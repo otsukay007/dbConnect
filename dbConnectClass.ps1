@@ -1,3 +1,12 @@
+# dbConnectClass.ps1
+# This script defines a class for managing a database connection using ODBC in PowerShell.
+# Requires -Version 5.0
+
+# use database
+
+
+
+
 
 # 自身のデータベースを管理するクラス
 class dbConnect {
@@ -25,6 +34,13 @@ class dbConnect {
         $this.command = $this.connection.CreateCommand( )
         $this.command.CommandText = "select * from tmdb_info_Avatar2"
     }
+
+    # Select use database
+    [void]UseDatabase() {
+        $this.command = $this.connection.CreateCommand( )
+        $this.command.CommandText = "use kokoro"
+    }    
+
 
     [void]ReadData() {
         # Implement read logic here

@@ -8,11 +8,14 @@
 . dbConnectClass.ps1
 . dbUserDatabaseClass.ps1
 
-
 Set-Location $PSScriptRoot
 try {
     $com = [dbConnect]::new("DSN=KVM; UID=iiujapan; PWD=iiujapan;")
     $com.Connect()
+
+    $com.UseDatabase()
+
+
     $com.ReadData()
 }
 catch {

@@ -1,6 +1,11 @@
 # 他のユーザーデータベースを管理するクラス
 # 別のURL Databaseからのデータをコピーする機能
 
+# for copy, create table
+# for copy, insert data
+# for copy, update data
+# for copy, delete table
+
 class dbUserDatabase {
     [string]$ConnectionString = $null
 
