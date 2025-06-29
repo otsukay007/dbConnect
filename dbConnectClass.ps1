@@ -20,7 +20,7 @@ class dbConnect {
     [string]$TableName
     [string]$DatabaseName
 
-    dbConnectClass([string]$connectionString) {
+    dbConnect([string]$connectionString) {
         $this.ConnectionString = $connectionString
 
         # $connectString = "DSN=KVM; UID=iiujapan; PWD=iiujapan;"

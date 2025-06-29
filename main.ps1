@@ -5,8 +5,8 @@
 # Version: 1.0.0
 
 # include class
-. dbConnectClass.ps1
-. dbUserDatabaseClass.ps1
+. ./dbConnectClass.ps1
+. ./dbUserDatabaseClass.ps1
 
 Set-Location $PSScriptRoot
 try {
