@@ -44,6 +44,14 @@ class dbConnect {
         $this.command.ExecuteNonQuery()
     }
 
+    [void]DeleteTable([string]$tableName) {
+        # Implement table deletion logic here
+        $this.TableName = $tableName
+        $this.command = $this.connection.CreateCommand( )
+        $this.command.CommandText = "DROP TABLE IF EXISTS $tableName"
+        $this.command.ExecuteNonQuery()
+    }
+
     # Select use database
     [void]UseDatabase() {
         $this.command = $this.connection.CreateCommand( )

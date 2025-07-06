@@ -15,6 +15,7 @@ try {
 
     #$com.UseDatabase()
     $com.CreateTable("object_0000")
+    $com.DeleteTable("object_0000")
 
     $com.ReadData()
 }
